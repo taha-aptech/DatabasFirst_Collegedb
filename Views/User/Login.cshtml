@@ -1,0 +1,23 @@
+﻿<h1 class="text-center mb-4">Login Page</h1>
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger">@ViewBag.error</div>
+}
+
+<form method="post" class="w-50 mx-auto">
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Enter your username"
+               name="log_username" required>
+    </div>
+
+    <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Enter your Password"
+               name="log_password" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+</form>
+
+<p class="text-center mt-3">
+    Don't have an account? <a href="@Url.Action("Register", "User")">Click to Register</a>
+</p>

@@ -1,0 +1,17 @@
+﻿
+<h1 class="text-center mb-4">Register Page</h1>
+
+<form method="post" class="w-50 mx-auto">
+    <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Enter your Username" name="Username" required>
+    </div>
+
+    <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Enter your Password" name="Password" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+</form>
+
+<p class="text-center mt-3">
+    Already have an account? <a href="@Url.Action("Login", "User")">Click to Login</a>
+</p>
