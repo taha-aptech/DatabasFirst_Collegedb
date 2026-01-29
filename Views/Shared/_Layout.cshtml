@@ -23,12 +23,30 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="User" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
+                   @*  <li class="nav-item">
                         <a class="nav-link" asp-controller="User" asp-action="Login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="User" asp-action="Logout">Logout</a>
-                    </li>
+                    </li> *@
+                    @if (Context.Session.GetString("user_id") == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Login">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <span class="nav-link text-white">
+                                Hi, @Context.Session.GetString("user_name")
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+
                 </ul>
             </div>
         </div>
@@ -40,7 +58,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center p-3 mt-5">
+    <footer class="bg-dark text-white text-center p-3 mt-5 fixed-bottom">
         © 2026 College Management System
     </footer>
 

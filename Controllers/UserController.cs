@@ -10,18 +10,14 @@ namespace Auth.Controllers
 {
     public class UserController : Controller
     {
-        private readonly MyContext _context;
+        private readonly MyContext _context;   // class variable
 
+
+        // constructor
         public UserController(MyContext context)
         {
             _context = context;
         }
-
-        // Home Page
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
 
 
         public IActionResult Index()
@@ -29,7 +25,6 @@ namespace Auth.Controllers
             var user = HttpContext.Session.GetString("user_id");
             if (user != null)
             {
-                ViewBag.user_name = HttpContext.Session.GetString("user_name");
                 return View();
             }
             else
@@ -70,21 +65,18 @@ namespace Auth.Controllers
         {
             var row = _context.Users.FirstOrDefault(u => u.Username == log_username);
 
-            //if(row != null && row.password == log_password)
-            //{
-            //    HttpContext.Session.SetString("user_session", row.id.ToString());
-            //    return RedirectToAction("Index");
-            //}
 
             if (row != null)
             {
+                // verifying hash password - which comes from db
                 var hasher = new PasswordHasher<User>();
                 var result = hasher.VerifyHashedPassword(row, row.Password, log_password);
 
                 if (result == PasswordVerificationResult.Success)
                 {
+                    // storing data in session variables
                     HttpContext.Session.SetString("user_id", row.UserId.ToString());
-                    HttpContext.Session.SetString("user_id", row.RoleId.ToString());
+                    HttpContext.Session.SetString("role_id", row.RoleId.ToString());
                     HttpContext.Session.SetString("user_name", row.Username);
                     
 
@@ -108,37 +100,7 @@ namespace Auth.Controllers
 
 
 
-
-        public IActionResult FacultyPanel()
-        {
-            var role = HttpContext.Session.GetString("user_role");
-
-            if (role != "1")
-            {
-                return RedirectToAction("AccessDenied");
-            }
-
-
-            return View();
-        }
-
-
-        public IActionResult StudentPanel()
-        {
-            var role = HttpContext.Session.GetString("user_role");
-
-            if (role != "2")
-            {
-                return RedirectToAction("AccessDenied");
-            }
-
-            return View();
-        }
-
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
+  
 
     }
 
