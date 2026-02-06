@@ -1,0 +1,57 @@
+﻿@model Attendance
+@{
+    ViewBag.Title = "Create Attendance";
+    Layout = "_AdminLayout";
+
+    var students = ViewBag.Students as List<Student>;
+    var courses = ViewBag.Courses as List<Course>;
+}
+
+<h1 class="text-center mb-4">Add New Attendance</h1>
+
+<form asp-action="CreateAttendance" method="post" class="w-50 mx-auto">
+
+    <!-- Student -->
+    <div class="mb-3">
+        <label class="form-label">Student</label>
+        <select asp-for="StudentId" class="form-control" required>
+            <option value="">Select Student</option>
+            @foreach (var s in students)
+            {
+                <option value="@s.StudentId">@s.Name</option>
+            }
+        </select>
+    </div>
+
+    <!-- Course -->
+    <div class="mb-3">
+        <label class="form-label">Course</label>
+        <select asp-for="CourseId" class="form-control" required>
+            <option value="">Select Course</option>
+            @foreach (var c in courses)
+            {
+                <option value="@c.CourseId">@c.CourseName</option>
+            }
+        </select>
+    </div>
+
+    <!-- Attendance Date -->
+    <div class="mb-3">
+        <label class="form-label">Attendance Date</label>
+        <input asp-for="AttendanceDate" type="date" class="form-control" />
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+        Save Attendance
+    </button>
+
+</form>

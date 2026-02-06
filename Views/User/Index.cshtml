@@ -1,5 +1,97 @@
 ﻿@{
     ViewBag.Title = "Admin Dashboard";
+    Layout = "_AdminLayout";
 }
-<h1>Home Page</h1>
-<p>Welcome, @Context.Session.GetString("user_name")!</p>
+
+<main>
+    <div class="container-fluid px-4">
+
+        <h1 class="mt-4">Dashboard</h1>
+        @* <ol class="breadcrumb mb-4"> *@
+        @*     <li class="breadcrumb-item active">Dashboard</li> *@
+        @* </ol> *@
+
+        <p>Welcome, <strong>@Context.Session.GetString("user_name")</strong></p>
+
+        <!-- ================= CARDS ================= -->
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">
+                        Faculty
+                        <h3>@ViewBag.TotalFaculty</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">
+                        Students
+                        <h3>@ViewBag.TotalStudents</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">
+                        Courses
+                        <h3>@ViewBag.TotalCourses</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">
+                        Enrollments
+                        <h3>@ViewBag.TotalEnrollments</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+           
+
+        <!-- ================= DATA TABLE ================= -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Student Course Attendance Summary
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Student</th>
+                            <th>Faculty</th>
+                            <th>Course</th>
+                            <th>Present</th>
+                            <th>Absent</th>
+                            <th>Enrollment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in ViewBag.TableData)
+                        {
+                            <tr>
+                                <td>@row.Student</td>
+                                <td>@row.Faculty</td>
+                                <td>@row.Course</td>
+                                <td>@row.Present</td>
+                                <td>@row.Absent</td>
+                                <td>@row.EnrollDate.ToShortDateString()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+

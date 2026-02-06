@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewBag.Title = "Student List";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-center my-3">Student List</h1>
+
+<div class="container m-2">
+
+    <a href="@Url.Action("CreateStudent")" class="btn btn-success mb-3">
+        Add New Student   
+     </a>
+
+
+    <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Batch</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                int count = 1;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@count</td>
+
+                    <td>
+                        <img src="~/admin/images/student/@item.Image"
+                             class="rounded-circle border"
+                             width="60"
+                             height="60"
+                             alt="Student Image" />
+                    </td>
+
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Age years</td>
+                    <td>@item.Batch</td>
+
+                    <td>
+                        <a asp-action="UpdateStudent"
+                           asp-route-id="@item.StudentId"
+                           class="btn btn-sm btn-warning">
+                            Edit
+                        </a>
+
+                        <a href="@Url.Action("DeleteStudent", "Admin", new{id=@item.StudentId})"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirmDelete();">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+                count++;
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Student?");
+    }
+</script>

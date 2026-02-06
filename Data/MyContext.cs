@@ -118,8 +118,6 @@ public partial class MyContext : DbContext
 
             entity.HasIndex(e => e.Email, "UQ__Faculty__AB6E61640D3CF66D").IsUnique();
 
-            entity.HasIndex(e => e.UserId, "UQ__Faculty__B9BE370E52EAB153").IsUnique();
-
             entity.Property(e => e.FacultyId).HasColumnName("faculty_id");
             entity.Property(e => e.Department)
                 .HasMaxLength(100)
@@ -140,8 +138,8 @@ public partial class MyContext : DbContext
                 .HasColumnName("name");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.User).WithOne(p => p.Faculty)
-                .HasForeignKey<Faculty>(d => d.UserId)
+            entity.HasOne(d => d.User).WithMany(p => p.Faculties)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Faculty__user_id__46E78A0C");
         });

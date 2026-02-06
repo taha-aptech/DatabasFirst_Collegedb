@@ -1,0 +1,40 @@
+﻿@model Course
+@{
+    ViewBag.Title = "Create Course";
+    Layout = "_AdminLayout";
+    var faculties = ViewBag.Faculties as List<Faculty>;
+}
+
+<h1 class="text-center mb-4">Add New Coursse</h1>
+
+<p style="color: red; margin:2px;">@ViewBag.message</p>
+
+<form method="post" class="w-50 mx-auto">
+    <div class="mb-3">
+        <label>Course Name</label>
+        <input asp-for="CourseName" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Faculty</label>
+        <select asp-for="FacultyId" class="form-control" required>
+            <option value="">Select Faculty</option>
+            @foreach (var f in faculties)
+            {
+                <option value="@f.FacultyId">@f.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Duration (months)</label>
+        <input asp-for="Duration" class="form-control" type="number" min="1" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Available Seats</label>
+        <input asp-for="AvailableSeats" class="form-control" type="number" min="0" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Course</button>
+</form>
