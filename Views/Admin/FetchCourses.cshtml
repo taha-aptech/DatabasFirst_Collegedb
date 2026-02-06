@@ -1,0 +1,49 @@
+﻿@model List<Course>
+
+
+@{
+    ViewBag.Title = "Courses List";
+    Layout = "_AdminLayout";
+}
+
+
+<h1 class="text-center my-3">Courses List</h1>
+
+
+<div class="container m-2">
+    <a href="@Url.Action("CreateCourse")" class="btn btn-success mb-3">Add New Course</a>
+
+<table class="table table-bordered table-hover text-center align-middle">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Course Name</th>
+            <th>Faculty</th>
+            <th>Duration</th>
+            <th>Seats</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.CourseId</td>
+                <td>@c.CourseName</td>
+                <td>@c.Faculty.Name</td>
+                <td>@c.Duration months</td>
+                <td>@c.AvailableSeats</td>
+                <td>
+                    <a href="@Url.Action("UpdateCourse", new {id=c.CourseId})" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("DeleteCourse", new {id=c.CourseId})" class="btn btn-danger" onclick="return confirmDelete();">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Student?");
+    }
+</script>

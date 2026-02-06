@@ -1,0 +1,42 @@
+﻿@model List<Enrollment>
+
+@{
+    ViewBag.Title = "Enrollment List";
+    Layout = "_AdminLayout";
+}
+
+<h1 class="text-center my-3">Attendance List</h1>
+
+<div class="container m-2">
+    <a href="@Url.Action("CreateEnrollment")" class="btn btn-success mb-3">
+        Add New Attendance
+    </a>
+
+    <table class="table table-bordered table-hover text-center align-middle">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Course Name</th>
+                <th>Enrollment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.EnrollmentId</td>
+                    <td>@a.Student.Name</td>
+                    <td>@a.Course.CourseName</td>
+                    <td>@a.EnrollmentDate</td>
+                    <td>
+                        <a href="@Url.Action("UpdateEnrollment", new { id = a.EnrollmentId })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("DeleteEnrollment", new { id = a.EnrollmentId })" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure delete this Enrollment?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -24,7 +24,7 @@ var app = builder.Build();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=User}/{action=Register}");
+    pattern: "{controller=User}/{action=Login}");
 
 app.UseStaticFiles();
 app.UseSession();

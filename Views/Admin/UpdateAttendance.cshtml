@@ -1,0 +1,60 @@
+﻿@model Attendance
+@{
+    ViewBag.Title = "Update Attendance";
+    Layout = "_AdminLayout";
+
+    var students = ViewBag.Students as List<Student>;
+    var courses = ViewBag.Courses as List<Course>;
+}
+
+<h1 class="text-center mb-4">Update Student Attendance</h1>
+
+<form asp-action="UpdateAttendance" method="post" class="w-50 mx-auto">
+
+    <input asp-for="AttendanceId" class="form-control" required hidden>
+
+    <!-- Student -->
+    <div class="mb-3">
+        <label class="form-label">Student</label>
+        <select asp-for="StudentId" class="form-control" required>
+            <option value="">Select Student</option>
+            @foreach (var s in students)
+            {
+                <option value="@s.StudentId">@s.Name</option>
+            }
+        </select>
+    </div>
+
+    <!-- Course -->
+    <div class="mb-3">
+        <label class="form-label">Course</label>
+        <select asp-for="CourseId" class="form-control" required>
+            <option value="">Select Course</option>
+            @foreach (var c in courses)
+            {
+                <option value="@c.CourseId">@c.CourseName</option>
+            }
+        </select>
+    </div>
+
+    <!-- Attendance Date -->
+    <div class="mb-3">
+        <label class="form-label">Attendance Date</label>
+        <input asp-for="AttendanceDate" type="date" class="form-control" />
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Update Attendance</button>
+        <a asp-controller="Admin" asp-action="FetchAttendance" class="btn btn-secondary">Back</a>
+    </div>
+
+</form>

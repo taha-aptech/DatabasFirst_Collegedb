@@ -13,7 +13,7 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
-    public virtual Faculty? Faculty { get; set; }
+    public virtual ICollection<Faculty> Faculties { get; set; } = new List<Faculty>();
 
     public virtual Role Role { get; set; } = null!;
 
