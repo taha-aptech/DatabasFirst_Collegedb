@@ -55,7 +55,7 @@ namespace Auth.Controllers
             }
             else if(user != null && role_id == 3)
             {
-                return RedirectToAction("FacultyIndex", "Faculty");
+                return RedirectToAction("Index", "Home");
                
             }
             else
